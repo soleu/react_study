@@ -14,10 +14,19 @@ js가 element를 생성하고, react js가 그것을 html로 번역하는 것
 <script>
   const root = document.getElementById("root");
   // js로 element 생성
-  const span = React.createElement(
-    "span",
-    { id: "sexy-span" },
+  const h3 = React.createElement(
+    "h3",
+    { id: "title", onMouseEnter: () => console.log("mouse enter") },
     "hello I'm a span"
   ); //name,property,content
-  ReactDOM.render(span, root); //span, span이 가야할 위치
+  const btn = React.createElement(
+    "button",
+    {
+      onClick: () => console.log("im clicked"),
+      style: { backgroundColor: "tomato" },
+    }, //function을 property안에 삽입 가능
+    "Click me"
+  );
+  const container = React.createElement("div", null, [h3, btn]); //렌더링 하고 싶은 element들을 하나로 묶어 .render에 다시 넣는다.
+  ReactDOM.render(container, root); //span, span이 가야할 위치
 </script>
