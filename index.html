@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <span> Total clicks: 0</span>
-    <button id="botton">Click me</button>
-  </body>
-  <script>
-    let counter = 0;
-    const botton = document.getElementById("btn");
-    const span = document.querySelector("span");
-    function handleClick() {
-      counter = counter + 1;
-      console.log("I have been clicked");
-      button.addEventListener("click", handleClick);
-      span.innerText = `Total clicks : ${counter}`;
-    }
-  </script>
-</html>
+<body>
+  <div id="root"></div>
+</body>
+<!--react 직접 import 하기
+react js - 어플리케이션이 아주 Interactive 하도록 만들어주는 Library(like engine)
+react-dom - library or package, 모든 react element 들을 html body에 둘 수 있도록 해줌 
+render - "사용자에게 보여준다." react element를 가지고 html로 만들어 배치한다.
 
-<!-- querySelector = 태그에 동적인 값을 넣을 수 있음 -->
+js가 element를 생성하고, react js가 그것을 html로 번역하는 것
+-->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script>
+  const root = document.getElementById("root");
+  // js로 element 생성
+  const span = React.createElement(
+    "span",
+    { id: "sexy-span" },
+    "hello I'm a span"
+  ); //name,property,content
+  ReactDOM.render(span, root); //span, span이 가야할 위치
+</script>
