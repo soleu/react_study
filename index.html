@@ -8,25 +8,44 @@ react-dom - library or package, 모든 react element 들을 html body에 둘 수
 render - "사용자에게 보여준다." react element를 가지고 html로 만들어 배치한다.
 
 js가 element를 생성하고, react js가 그것을 html로 번역하는 것
+
+jsx - 자바스크립트를 확장한 문법. 보통의 html과 비슷. 그러나 property를 html 태그의 속성처럼 적으면 됨
+jsx문법을 브라우저가 온전히 이해할 수 있게 하려면 'babel' 라이브러리 필요
 -->
+
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-<script>
-  const root = document.getElementById("root");
-  // js로 element 생성
-  const h3 = React.createElement(
-    "h3",
-    { id: "title", onMouseEnter: () => console.log("mouse enter") },
-    "hello I'm a span"
-  ); //name,property,content
-  const btn = React.createElement(
-    "button",
-    {
-      onClick: () => console.log("im clicked"),
-      style: { backgroundColor: "tomato" },
-    }, //function을 property안에 삽입 가능
-    "Click me"
-  );
-  const container = React.createElement("div", null, [h3, btn]); //렌더링 하고 싶은 element들을 하나로 묶어 .render에 다시 넣는다.
-  ReactDOM.render(container, root); //span, span이 가야할 위치
+<script src="https://unpkg.com/@bable/standalone/babel.min.js"></script>
+<script type="text/babel">
+  <script>
+    const root = document.getElementById("root");
+    // js로 element 생성(old way)
+    //   const h3 = React.createElement(
+    //     "h3",
+    //     { id: "title", onMouseEnter: () => console.log("mouse enter") },
+    //     "hello I'm a span"
+    //   ); //name,property,content
+    const Title = (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        Hello I'm a title
+      </h3>
+    );
+    //   const btn = React.createElement(
+    //     "button",
+    //     {
+    //       onClick: () => console.log("im clicked"),
+    //       style: { backgroundColor: "tomato" },
+    //     }, //function을 property안에 삽입 가능
+    //     "Click me"
+    //   );
+    const Button = (
+      <button
+        style={{ backgroundColor: "tomato" }}
+        onClick={() => console.log("i'm clicked")}
+      >
+        Click me
+      </button>
+    );
+    const container = React.createElement("div", null, [h3, btn]); //렌더링 하고 싶은 element들을 하나로 묶어 .render에 다시 넣는다.
+    ReactDOM.render(container, root); //span, span이 가야할 위치
 </script>
