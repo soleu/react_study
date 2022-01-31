@@ -20,18 +20,18 @@ babel - jsx로 적은 코드를 브라우저가 이해할 수 있는 형태(pure
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
   const root = document.getElementById("root");
-  let counter = 0;
-  function countUp() {
-    counter = counter + 1;
-    render(); //count up이 될 때마다 렌더링을 다시 함
+  function App() {
+    const [counter,setCounter]=React.useState(0);//defaultValue,changeValue
+    const onClick=()=>{
+        setCounter(counter+1);//변경 변수를 사용하여 state를 쉽게 변경 가능
+    }
+    return (
+      <div>
+        <h3>Total clicks : {counter}</h3>
+        <button onClick={onClick}>Click Me</button>
+      </div>
+    );
   }
-  function render() {
-    ReactDOM.render(<Container />, root);
-  }
-  const Container = ( //state가 바뀔때마다 리 렌더링이 되어야한다.
-    <div>
-      <h3>Total clicks : {counter}</h3>
-      <button onClick={countUp}>Click Me</button>
-    </div>
-  );
+  ReactDOM.render(<App/>,root)
 </script>
+</html>
