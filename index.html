@@ -21,12 +21,13 @@ babel - jsx로 적은 코드를 브라우저가 이해할 수 있는 형태(pure
 <script type="text/babel">
   const root = document.getElementById("root");
   function App() {
-    const [counter,setCounter]=React.useState(0);//defaultValue,changeValue
-    const onClick=()=>{//const 이지만 주소 변경이 아닌 값 자체의 변경이므로 사용가능하다
-    // setCounter(counter+1);//변경 변수를 사용하여 state를 쉽게 변경 가능(리렌더링) -> 해당 방법으로는 사용자가 직접 넣고싶은 값이 있을때 사용
-    //항상 현재의 값으로 변경해주는 방법
-    setCounter(current=>current+1)
-    }
+    const [counter, setCounter] = React.useState(0); //defaultValue,changeValue
+    const onClick = () => {
+      //const 이지만 주소 변경이 아닌 값 자체의 변경이므로 사용가능하다
+      // setCounter(counter+1);//변경 변수를 사용하여 state를 쉽게 변경 가능(리렌더링) -> 해당 방법으로는 사용자가 직접 넣고싶은 값이 있을때 사용
+      //항상 현재의 값으로 변경해주는 방법
+      setCounter((current) => current + 1);
+    };
     return (
       <div>
         <h3>Total clicks : {counter}</h3>
@@ -34,6 +35,5 @@ babel - jsx로 적은 코드를 브라우저가 이해할 수 있는 형태(pure
       </div>
     );
   }
-  ReactDOM.render(<App/>,root)
+  ReactDOM.render(<App />, root);
 </script>
-</html>

@@ -9,26 +9,53 @@
 <script type="text/babel">
   const root = document.getElementById("root");
   function App() {
-    const[minutes,setMinutes]=React.useState()
-    const onChange=(event)=>{
-        console.log(event.target.value)
-        setMinutes(event.target.value)
-    }
+    const [amount, setAmount] = React.useState(0); //default value
+    const [flipped, setFlipped] = React.useState(false);
+    const onChange = (event) => {
+      setAmount(event.target.value);
+    };
+    const reset = () => {
+      setAmount(0);
+    };
+    const onFlip = () => {
+      reset();
+      setFlipped((current) => !current);
+    };
+
     //jsx 는 class/for과 같이 javascript 예약어를 사용하지 못한다.
     //따라서 class -> className, for -> htmlFor로 수정해서 사용한다.
-    //html label for - input id 
+    //html label for - input id
     //label을 사용할때 input의 id값과 일치 시키면 값을 가져오거나 등의 동기화 상호작용이 가능하다.
     return (
       <div>
-        <h3 >Super Converter</h3>
-        <label htmlFor="minutes">Minutes</label>
-        <input values={minutes} id="minuates" placeholder="Minutes" type="number" onChange={onChange}/>
-        <h4> You want to convert {minutes} </h4>
-        <label htmlFor="hours">Hours</label>
-        <input id="hours" placeholder="Hours" type="number"/>
+        <h3>Super Converter</h3>
+        <div>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={flipped ? amount * 60 : amount}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange}
+            disabled={flipped}
+          />
+          <h4> You want to convert {amount} </h4>
+        </div>
+        <div>
+          <label htmlFor="hours">Hours</label>
+          <input
+            value={flipped ? amount : Math.round(amount / 60)}
+            id="hours"
+            placeholder="Hours"
+            type="number"
+            onChange={onChange}
+            disabled={!flipped}
+          />
+        </div>
+        <button onClick={reset}>reset</button>
+        <button onClick={onFlip}>{flipped ? "Turn back" : "Invert"}</button>
       </div>
     );
   }
-  ReactDOM.render(<App/>,root)
+  ReactDOM.render(<App />, root);
 </script>
-</html>
