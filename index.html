@@ -22,8 +22,8 @@ babel - jsx로 적은 코드를 브라우저가 이해할 수 있는 형태(pure
   const root = document.getElementById("root");
   function App() {
     const [counter,setCounter]=React.useState(0);//defaultValue,changeValue
-    const onClick=()=>{
-        setCounter(counter+1);//변경 변수를 사용하여 state를 쉽게 변경 가능
+    const onClick=()=>{//const 이지만 주소 변경이 아닌 값 자체의 변경이므로 사용가능하다
+        setCounter(counter+1);//변경 변수를 사용하여 state를 쉽게 변경 가능(리렌더링)
     }
     return (
       <div>
