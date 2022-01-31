@@ -11,41 +11,27 @@ js가 element를 생성하고, react js가 그것을 html로 번역하는 것
 
 jsx - 자바스크립트를 확장한 문법. 보통의 html과 비슷. 그러나 property를 html 태그의 속성처럼 적으면 됨
 jsx문법을 브라우저가 온전히 이해할 수 있게 하려면 'babel' 라이브러리 필요
+babel - jsx로 적은 코드를 브라우저가 이해할 수 있는 형태(pure한 react)로 바꿔줌
+//컴포넌트의 첫 글자는 반드시 대문자여야함(HTML 태그로 인식될 수 있기 때문)
 -->
 
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@bable/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-  <script>
-    const root = document.getElementById("root");
-    // js로 element 생성(old way)
-    //   const h3 = React.createElement(
-    //     "h3",
-    //     { id: "title", onMouseEnter: () => console.log("mouse enter") },
-    //     "hello I'm a span"
-    //   ); //name,property,content
-    const Title = (
-      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-        Hello I'm a title
-      </h3>
-    );
-    //   const btn = React.createElement(
-    //     "button",
-    //     {
-    //       onClick: () => console.log("im clicked"),
-    //       style: { backgroundColor: "tomato" },
-    //     }, //function을 property안에 삽입 가능
-    //     "Click me"
-    //   );
-    const Button = (
-      <button
-        style={{ backgroundColor: "tomato" }}
-        onClick={() => console.log("i'm clicked")}
-      >
-        Click me
-      </button>
-    );
-    const container = React.createElement("div", null, [h3, btn]); //렌더링 하고 싶은 element들을 하나로 묶어 .render에 다시 넣는다.
-    ReactDOM.render(container, root); //span, span이 가야할 위치
+  const root = document.getElementById("root");
+  let counter = 0;
+  function countUp() {
+    counter = counter + 1;
+    render(); //count up이 될 때마다 렌더링을 다시 함
+  }
+  function render() {
+    ReactDOM.render(<Container />, root);
+  }
+  const Container = ( //state가 바뀔때마다 리 렌더링이 되어야한다.
+    <div>
+      <h3>Total clicks : {counter}</h3>
+      <button onClick={countUp}>Click Me</button>
+    </div>
+  );
 </script>
