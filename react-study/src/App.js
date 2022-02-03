@@ -3,9 +3,18 @@ import styles from "./App.module.css";
 import { useState, useEffect } from "react";
 //css
 //[name].module.css 파일 명명 규칙을 사용. CSS 모듈을 사용하면 이름 충돌에 대한 걱정없이 다른 파일에서 동일한 CSS 클래스 이름 사용가능
+function Hello() {
+  useEffect(() => {
+    console.log("created :) ");
+    return () => console.log("destroyed :( "); //clean up function : 컴포넌트가 삭제될 때 실행(return 으로 실행 가능)
+  }, []);
+  return <h1>Hello!</h1>;
+}
 function App() {
+  const [showing, setShowing] = useState(false);
   const [counter, setCounter] = useState(0);
   const [keyword, setKeyword] = useState();
+  const onShow = () => setShowing((prev) => !prev);
   const onClick = () => setCounter((prev) => prev + 1);
   const onChange = (event) => setKeyword(event.target.value);
   console.log("i run all the time");
@@ -25,6 +34,8 @@ function App() {
   }, [counter]);
   return (
     <div>
+      {showing ? <Hello /> : null}
+      <button onClick={onShow}>{showing ? "Hide" : "Show"}</button>
       <input
         value={keyword}
         type="text"
