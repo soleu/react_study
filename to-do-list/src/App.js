@@ -15,13 +15,20 @@ function App() {
   return (
     <div>
       <h1>My To Dos ({toDos.length})</h1>
-      <input
-        value={toDo}
-        onChange={onChange}
-        type="text"
-        placeholder="Write your to do"
-      ></input>
-      <button onClick={onSubmit}>Add To Do</button>
+      <form onSubmit={onSubmit}>
+        <input
+          value={toDo}
+          onChange={onChange}
+          type="text"
+          placeholder="Write your to do"
+        ></input>
+        <button>Add To Do</button>
+      </form>
+      <hr />
+      {/* //item,key -> 리액트는 기본적으로 list에 있는 모든 item을 인식하기 때문에 key를 넣어 고유하게 만들어줘야한다. */}
+      {toDos.map((toDo, index) => (
+        <li key={index}>{toDo}</li>
+      ))}
     </div>
   );
 }
