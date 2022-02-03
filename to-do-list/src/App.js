@@ -14,6 +14,7 @@ function App() {
   };
   return (
     <div>
+      <h1>My To Dos ({toDos.length})</h1>
       <input
         value={toDo}
         onChange={onChange}
