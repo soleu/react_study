@@ -7,12 +7,16 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-  function Btn({ text }) {
+  function Btn({ text, changeValue }) {
     //props - 부모 컴포넌트로부터 자식 컴포넌트에게 데이터를 전송하는 방식
     //부모의 props를 사용하면 자식 컴포넌트(함수)의 인자로 객체가 들어가게 된다.
     //props 는 하나의 Object안에 모든 내용이 들어가게 된다.
+    //propTypes 설치하면 type으로 에러검출 가능
+    //PropTypes.number.isRequired(안쓰면 Optional)
+    console.log("was rendered");
     return (
       <button
+        onClick={changeValue}
         style={{
           backgroundColor: "tomato",
           color: "white",
@@ -29,9 +33,11 @@
     return <button>Confirm</button>;
   }
   function App() {
+    const [value, setValue] = React.useState("Save Changes");
+    const changeValue = () => setValue("Revert Changes");
     return (
       <div>
-        <Btn text="Save Changes" />
+        <Btn text={value} onClick={changeValue} />
         <Btn text="Continue" />
       </div>
     );
